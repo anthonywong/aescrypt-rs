@@ -24,7 +24,7 @@ use aescrypt_rs::{
 
 /// AES Crypt command-line tool — encrypt and decrypt files using AES-256.
 #[derive(Parser)]
-#[command(name = "aescrypt", version, about, long_about = None)]
+#[command(name = "aescrypt-cli", version, about, long_about = None)]
 struct Cli {
     #[command(subcommand)]
     command: Commands,

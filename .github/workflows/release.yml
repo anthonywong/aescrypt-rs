@@ -40,10 +40,10 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y musl-tools
 
       - name: Build release binary
-        run: cargo build --release --bin aescrypt --target ${{ matrix.target }}
+        run: cargo build --release --bin aescrypt-cli --target ${{ matrix.target }}
 
       - name: Rename binary
-        run: cp target/${{ matrix.target }}/release/aescrypt ${{ matrix.asset_name }}
+        run: cp target/${{ matrix.target }}/release/aescrypt-cli ${{ matrix.asset_name }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
