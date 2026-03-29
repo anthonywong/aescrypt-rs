@@ -17,6 +17,9 @@ jobs:
           - os: ubuntu-latest
             target: x86_64-unknown-linux-musl
             asset_name: aescrypt-linux-x86_64
+          - os: ubuntu-24.04-arm
+            target: aarch64-unknown-linux-musl
+            asset_name: aescrypt-linux-aarch64
           - os: macos-13
             target: x86_64-apple-darwin
             asset_name: aescrypt-macos-x86_64
@@ -33,7 +36,7 @@ jobs:
           targets: ${{ matrix.target }}
 
       - name: Install musl tools
-        if: matrix.target == 'x86_64-unknown-linux-musl'
+        if: contains(matrix.target, 'linux-musl')
         run: sudo apt-get update && sudo apt-get install -y musl-tools
 
       - name: Build release binary
@@ -65,5 +68,6 @@ jobs:
         with:
           files: |
             artifacts/aescrypt-linux-x86_64/aescrypt-linux-x86_64
+            artifacts/aescrypt-linux-aarch64/aescrypt-linux-aarch64
             artifacts/aescrypt-macos-x86_64/aescrypt-macos-x86_64
             artifacts/aescrypt-macos-aarch64/aescrypt-macos-aarch64

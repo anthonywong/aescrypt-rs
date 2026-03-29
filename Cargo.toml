@@ -3,7 +3,7 @@
 # ============================================================================
 
 [package]
-name = "aescrypt-rs"
+name = "aescrypt-rs-cli"
 version = "0.0.1"
 edition = "2024"
 rust-version = "1.85"
@@ -19,6 +19,14 @@ include = [
     "LICENSE*",
     "README.md",
 ]
+
+
+# ----------------------------------------------------------------------
+# Library name (kept stable so downstream and the binary crate can use
+# `aescrypt_rs` regardless of the package name).
+# ----------------------------------------------------------------------
+[lib]
+name = "aescrypt_rs"
 
 
 # ----------------------------------------------------------------------

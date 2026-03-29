@@ -15,7 +15,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "aescrypt-rs"
+name = "aescrypt-rs-cli"
 version = "0.0.1"
 dependencies = [
  "aes",
