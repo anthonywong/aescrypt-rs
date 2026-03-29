@@ -3,8 +3,8 @@
 # ============================================================================
 
 [package]
-name = "aescrypt-rs"
-version = "0.2.0-dev"
+name = "aescrypt-rs-cli"
+version = "0.0.1"
 edition = "2024"
 rust-version = "1.85"
 description = "AES Crypt (v0-v3) Rust encryption/decryption library"
@@ -19,6 +19,14 @@ include = [
     "LICENSE*",
     "README.md",
 ]
+
+
+# ----------------------------------------------------------------------
+# Library name (kept stable so downstream and the binary crate can use
+# `aescrypt_rs` regardless of the package name).
+# ----------------------------------------------------------------------
+[lib]
+name = "aescrypt_rs"
 
 
 # ----------------------------------------------------------------------
@@ -78,6 +86,13 @@ harness = false
 # name = "convert_wip"
 # harness = false
 # required-features = ["batch-ops"]
+
+# ----------------------------------------------------------------------
+# Binary (CLI)
+# ----------------------------------------------------------------------
+[[bin]]
+name = "aescrypt-cli"
+path = "src/bin/aescrypt-cli.rs"
 
 # ----------------------------------------------------------------------
 # Binary (script)
