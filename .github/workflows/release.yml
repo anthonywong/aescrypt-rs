@@ -23,9 +23,11 @@ jobs:
           - os: ubuntu-latest
             target: x86_64-unknown-linux-musl
             asset_name: aescrypt-linux-x86_64
+            linux: true
           - os: ubuntu-24.04-arm
             target: aarch64-unknown-linux-musl
             asset_name: aescrypt-linux-aarch64
+            linux: true
           - os: macos-13
             target: x86_64-apple-darwin
             asset_name: aescrypt-macos-x86_64
@@ -47,17 +49,54 @@ jobs:
         if: contains(matrix.target, 'linux-musl')
         run: sudo apt-get update && sudo apt-get install -y musl-tools
 
+      - name: Install Linux packaging tools
+        if: matrix.linux
+        run: cargo install cargo-deb cargo-generate-rpm
+
       - name: Build release binary
         run: cargo build --release --bin aescrypt-cli --target ${{ matrix.target }}
+
+      - name: Strip binary
+        if: matrix.linux
+        run: strip target/${{ matrix.target }}/release/aescrypt-cli
+
+      - name: Build .deb package
+        if: matrix.linux
+        # --no-build: binary was already built and stripped above
+        run: cargo deb --no-build --target ${{ matrix.target }}
+
+      - name: Build .rpm package
+        if: matrix.linux
+        run: cargo generate-rpm --target ${{ matrix.target }}
+
+      - name: Collect packages
+        if: matrix.linux
+        run: |
+          cp target/${{ matrix.target }}/debian/*.deb ${{ matrix.asset_name }}.deb
+          cp target/${{ matrix.target }}/generate-rpm/*.rpm ${{ matrix.asset_name }}.rpm
 
       - name: Rename binary
         run: cp target/${{ matrix.target }}/release/aescrypt-cli ${{ matrix.asset_name }}
 
-      - name: Upload artifact
+      - name: Upload binary artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.asset_name }}
           path: ${{ matrix.asset_name }}
+
+      - name: Upload .deb artifact
+        if: matrix.linux
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.asset_name }}.deb
+          path: ${{ matrix.asset_name }}.deb
+
+      - name: Upload .rpm artifact
+        if: matrix.linux
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.asset_name }}.rpm
+          path: ${{ matrix.asset_name }}.rpm
 
   release:
     name: Publish GitHub Release
@@ -80,3 +119,7 @@ jobs:
             artifacts/aescrypt-linux-aarch64/aescrypt-linux-aarch64
             artifacts/aescrypt-macos-x86_64/aescrypt-macos-x86_64
             artifacts/aescrypt-macos-aarch64/aescrypt-macos-aarch64
+            artifacts/aescrypt-linux-x86_64.deb/aescrypt-linux-x86_64.deb
+            artifacts/aescrypt-linux-aarch64.deb/aescrypt-linux-aarch64.deb
+            artifacts/aescrypt-linux-x86_64.rpm/aescrypt-linux-x86_64.rpm
+            artifacts/aescrypt-linux-aarch64.rpm/aescrypt-linux-aarch64.rpm

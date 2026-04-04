@@ -95,6 +95,31 @@ name = "aescrypt-cli"
 path = "src/bin/aescrypt-cli.rs"
 
 # ----------------------------------------------------------------------
+# Debian package metadata (used by cargo-deb)
+# When invoked with --target <triple>, cargo-deb automatically resolves
+# "target/release/" to "target/<triple>/release/".
+# ----------------------------------------------------------------------
+[package.metadata.deb]
+name = "aescrypt-cli"
+section = "utils"
+priority = "optional"
+assets = [
+    { source = "target/release/aescrypt-cli", dest = "/usr/bin/aescrypt-cli", mode = "755" },
+    { source = "README.md", dest = "/usr/share/doc/aescrypt-cli/README.md", mode = "644" },
+]
+
+# ----------------------------------------------------------------------
+# RPM package metadata (used by cargo-generate-rpm)
+# When invoked with --target <triple>, cargo-generate-rpm automatically
+# resolves "target/release/" to "target/<triple>/release/".
+# ----------------------------------------------------------------------
+[package.metadata.generate-rpm]
+assets = [
+    { source = "target/release/aescrypt-cli", dest = "/usr/bin/aescrypt-cli", mode = "0755" },
+    { source = "README.md", dest = "/usr/share/doc/aescrypt-cli/README.md", mode = "0644" },
+]
+
+# ----------------------------------------------------------------------
 # Binary (script)
 # ----------------------------------------------------------------------
 # [[bin]]
