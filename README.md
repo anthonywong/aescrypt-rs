@@ -241,7 +241,7 @@ aescrypt-rs = "0.2.0"
 
 ## Changelog
 
-See [CHANGELOG.md](https://github.com/anthonywong/aescrypt-rs/blob/main/CHANGELOG.md) for a list of changes.
+See [CHANGELOG.md](https://github.com/Slurp9187/aescrypt-rs/blob/v020rc/CHANGELOG.md) for a list of changes.
 
 ## License
 
