@@ -16,7 +16,7 @@ dependencies = [
 
 [[package]]
 name = "aescrypt-rs-cli"
-version = "0.2.0-rc.7"
+version = "0.2.0-rc.8"
 dependencies = [
  "aes",
  "clap",
@@ -108,6 +108,24 @@ name = "autocfg"
 version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c08606f8c3cbf4ce6ec8e28fb0014a2c086708fe954eaa885384a6165172e7e8"
+
+[[package]]
+name = "base16ct"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fd307490d624467aa6f74b0eabb77633d1f758a7b25f12bceb0b22e08d9726f6"
+
+[[package]]
+name = "base64ct"
+version = "1.8.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2af50177e190e07a26ab74f8b1efbfe2ef87da2116221318cb1c2e82baf7de06"
+
+[[package]]
+name = "bech32"
+version = "0.11.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "32637268377fc7b10a8c6d51de3e7fba1ce5dd371a96e342b34e6078db558e7f"
 
 [[package]]
 name = "bitflags"
@@ -713,10 +731,13 @@ dependencies = [
 
 [[package]]
 name = "secure-gate"
-version = "0.9.0-rc.3"
+version = "0.9.0-rc.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5e362e72313d664108d6f0a320da60a397697305228d7866e722463defa37357"
+checksum = "1be2c2bce4bcb1e246358b88476c0bd2e10b08d221bee7e8808172c09310e589"
 dependencies = [
+ "base16ct",
+ "base64ct",
+ "bech32",
  "rand",
  "subtle",
  "thiserror",
