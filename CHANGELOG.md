@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0-rc.8] - 2026-04-05
+
+### Changed
+
+- **`secure-gate`** updated to **`=0.9.0-rc.5`** (exact pin); refresh **`Cargo.lock`** for new transitive versions. No public API changes were required in this codebase for the rc.5 upgrade.
+
+### Note
+
+- Still waiting on secure-gate stable release to make v0.2.0 stable release.
+
 ## [0.2.0-rc.7] - 2026-03-23
 
 ### Note
